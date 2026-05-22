@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buriram Journey | เช็คลิสเตรียมตัวก่อนเดินทาง 5 วัน</title>
+    <!-- Google Fonts: Outfit & Noto Sans Thai -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="background-decorations">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="app-header">
+            <div class="logo-area">
+                <span class="logo-icon">🚗</span>
+                <div>
+                    <h1>บุรีรัมย์ 5 วัน</h1>
+                    <p class="subtitle">เตรียมความพร้อมก่อนออกจากห้องพักอย่างมั่นใจ</p>
+                </div>
+            </div>
+            <div class="theme-toggle-area">
+                <button id="themeToggle" class="btn-icon" aria-label="เปลี่ยนโหมดสี">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Progress Dashboard -->
+        <section class="dashboard-card glass-panel animate-fade-in">
+            <div class="dashboard-content">
+                <div class="progress-details">
+                    <h2>ความพร้อมในการเดินทาง</h2>
+                    <p id="motivationalMessage" class="motivational-text">กำลังโหลด...</p>
+                    
+                    <div class="progress-bar-container">
+                        <div id="progressBar" class="progress-bar" style="width: 0%"></div>
+                    </div>
+                    
+                    <div class="progress-stats">
+                        <span class="stat-text"><strong id="completedCount">0</strong> จาก <strong id="totalCount">0</strong> รายการสำเร็จ</span>
+                        <span id="percentText" class="percent-badge">0%</span>
+                    </div>
+                </div>
+                
+                <div class="quick-status-grid" id="quickStatusGrid">
+                    <!-- Dynamic mini status icons will be inserted here -->
+                </div>
+            </div>
+            
+            <div class="dashboard-actions">
+                <button id="resetBtn" class="btn btn-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M16 3h5v5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 21H3v-5"/></svg>
+                    รีเซ็ตเช็คลิสทั้งหมด
+                </button>
+                <div class="countdown-badge">
+                    <span class="countdown-label">ระยะเวลาเดินทาง:</span>
+                    <span class="countdown-value">5 วัน (พักผ่อนยาว!)</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab Switcher -->
+        <div class="tab-switcher-container">
+            <div class="tab-switcher glass-panel animate-fade-in">
+                <button id="tabOutgoingBtn" class="tab-btn active" data-tab="outgoing">
+                    <span class="tab-btn-icon">🚪</span>
+                    ออกจากห้องพัก (ขาไป)
+                </button>
+                <button id="tabIncomingBtn" class="tab-btn" data-tab="incoming">
+                    <span class="tab-btn-icon">🏡</span>
+                    กลับจากบุรีรัมย์ (ขากลับ)
+                </button>
+            </div>
+        </div>
+
+        <!-- Travel Notes Section -->
+        <section class="notes-card glass-panel animate-fade-in">
+            <div class="notes-header">
+                <div class="notes-title">
+                    <span class="notes-icon">📓</span>
+                    <h2>บันทึกความจำและโน้ตเดินทาง (Travel Notes)</h2>
+                </div>
+                <span id="saveStatus" class="save-status">บันทึกอัตโนมัติแล้ว 💾</span>
+            </div>
+            <textarea id="travelNotes" class="notes-textarea" placeholder="พิมพ์บันทึกรายละเอียดเพิ่มเติมที่นี่ เช่น หมายเลขห้องสอบ, เบอร์ติดต่อฉุกเฉิน, ของที่ต้องซื้อกลับบ้าน หรือข้อความเตือนความจำส่วนตัว..."></textarea>
+        </section>
+
+        <!-- Checklist Categories Grid -->
+        <main class="categories-grid" id="categoriesGrid">
+            <!-- JavaScript will populate categories and items here dynamically -->
+        </main>
+
+        <!-- Toast Notification Area -->
+        <div id="toastContainer" class="toast-container"></div>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>จัดเตรียมห้องเรียบร้อย แล้วกลับบ้านไปเจอครอบครัวที่บุรีรัมย์อย่างสุขใจ ❤️</p>
+            <p class="copyright">พัฒนาด้วยความใส่ใจเป็นพิเศษเพื่อทริปแสนปลอดภัย</p>
+        </footer>
+    </div>
+
+    <!-- Main JavaScript File -->
+    <script src="app.js"></script>
+</body>
+</html>
