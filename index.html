@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buriram Journey | เช็คลิสเตรียมตัวก่อนเดินทาง 5 วัน</title>
+    <title>Travel Checklist | เช็คลิสเตรียมตัวก่อนเดินทาง</title>
+    <meta name="description" content="เช็คลิสเตรียมตัวก่อนเดินทาง แก้ไขจุดหมายปลายทางได้ จัดการรายการได้ยืดหยุ่น">
     <!-- Google Fonts: Outfit & Noto Sans Thai -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +25,12 @@
             <div class="logo-area">
                 <span class="logo-icon">🚗</span>
                 <div>
-                    <h1>บุรีรัมย์ 5 วัน</h1>
+                    <div class="editable-header">
+                        <h1 id="tripTitle">กำลังโหลด...</h1>
+                        <button id="editTripBtn" class="btn-edit-trip" aria-label="แก้ไขจุดหมายปลายทาง" title="แก้ไขจุดหมายและจำนวนวัน">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+                        </button>
+                    </div>
                     <p class="subtitle">เตรียมความพร้อมก่อนออกจากห้องพักอย่างมั่นใจ</p>
                 </div>
             </div>
@@ -35,6 +41,77 @@
                 </button>
             </div>
         </header>
+
+        <!-- Edit Trip Modal -->
+        <div id="editTripModal" class="modal-overlay" style="display: none;">
+            <div class="modal-content glass-panel">
+                <div class="modal-header">
+                    <h2>✏️ แก้ไขรายละเอียดทริป</h2>
+                    <button id="closeEditModal" class="btn-modal-close" aria-label="ปิด">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="inputDestination">🗺️ จุดหมายปลายทาง</label>
+                        <input type="text" id="inputDestination" class="modal-input" placeholder="เช่น เชียงใหม่, ภูเก็ต, โตเกียว..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDays">📅 จำนวนวัน</label>
+                        <input type="number" id="inputDays" class="modal-input" min="1" max="365" placeholder="เช่น 3, 5, 7..." required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="cancelEditTrip" class="btn btn-secondary">ยกเลิก</button>
+                    <button id="saveEditTrip" class="btn btn-primary">💾 บันทึก</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Category Modal -->
+        <div id="addCategoryModal" class="modal-overlay" style="display: none;">
+            <div class="modal-content glass-panel">
+                <div class="modal-header">
+                    <h2>📂 เพิ่มหมวดหมู่ใหม่</h2>
+                    <button id="closeAddCategoryModal" class="btn-modal-close" aria-label="ปิด">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="inputCategoryName">ชื่อหมวดหมู่</label>
+                        <input type="text" id="inputCategoryName" class="modal-input" placeholder="เช่น ของฝาก, อุปกรณ์กีฬา..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCategoryIcon">ไอคอน Emoji</label>
+                        <input type="text" id="inputCategoryIcon" class="modal-input" placeholder="เช่น 🎁, ⚽, 🏖️..." maxlength="4">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCategoryTab">สำหรับ</label>
+                        <select id="inputCategoryTab" class="modal-input">
+                            <option value="outgoing">ขาไป (ออกจากห้องพัก)</option>
+                            <option value="incoming">ขากลับ</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="cancelAddCategory" class="btn btn-secondary">ยกเลิก</button>
+                    <button id="saveAddCategory" class="btn btn-primary">➕ เพิ่มหมวดหมู่</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Modal -->
+        <div id="summaryModal" class="modal-overlay" style="display: none;">
+            <div class="modal-content glass-panel modal-large">
+                <div class="modal-header">
+                    <h2>📊 สรุปรายการก่อนออกเดินทาง</h2>
+                    <button id="closeSummaryModal" class="btn-modal-close" aria-label="ปิด">&times;</button>
+                </div>
+                <div class="modal-body" id="summaryContent">
+                    <!-- Dynamic summary will be inserted here -->
+                </div>
+                <div class="modal-footer">
+                    <button id="closeSummaryBtn" class="btn btn-secondary">ปิด</button>
+                </div>
+            </div>
+        </div>
 
         <!-- Progress Dashboard -->
         <section class="dashboard-card glass-panel animate-fade-in">
@@ -59,13 +136,19 @@
             </div>
             
             <div class="dashboard-actions">
-                <button id="resetBtn" class="btn btn-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M16 3h5v5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 21H3v-5"/></svg>
-                    รีเซ็ตเช็คลิสทั้งหมด
-                </button>
+                <div class="dashboard-actions-left">
+                    <button id="resetBtn" class="btn btn-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M16 3h5v5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 21H3v-5"/></svg>
+                        รีเซ็ตเช็คลิสทั้งหมด
+                    </button>
+                    <button id="summaryBtn" class="btn btn-accent">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                        ดูสรุป
+                    </button>
+                </div>
                 <div class="countdown-badge">
                     <span class="countdown-label">ระยะเวลาเดินทาง:</span>
-                    <span class="countdown-value">5 วัน (พักผ่อนยาว!)</span>
+                    <span id="countdownValue" class="countdown-value">กำลังโหลด...</span>
                 </div>
             </div>
         </section>
@@ -75,11 +158,11 @@
             <div class="tab-switcher glass-panel animate-fade-in">
                 <button id="tabOutgoingBtn" class="tab-btn active" data-tab="outgoing">
                     <span class="tab-btn-icon">🚪</span>
-                    ออกจากห้องพัก (ขาไป)
+                    <span id="tabOutgoingLabel">ออกจากห้องพัก (ขาไป)</span>
                 </button>
                 <button id="tabIncomingBtn" class="tab-btn" data-tab="incoming">
                     <span class="tab-btn-icon">🏡</span>
-                    กลับจากบุรีรัมย์ (ขากลับ)
+                    <span id="tabIncomingLabel">ขากลับ</span>
                 </button>
             </div>
         </div>
@@ -96,6 +179,14 @@
             <textarea id="travelNotes" class="notes-textarea" placeholder="พิมพ์บันทึกรายละเอียดเพิ่มเติมที่นี่ เช่น หมายเลขห้องสอบ, เบอร์ติดต่อฉุกเฉิน, ของที่ต้องซื้อกลับบ้าน หรือข้อความเตือนความจำส่วนตัว..."></textarea>
         </section>
 
+        <!-- Add Category Button -->
+        <div class="add-category-area animate-fade-in">
+            <button id="addCategoryBtn" class="btn btn-add-category">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                เพิ่มหมวดหมู่ใหม่
+            </button>
+        </div>
+
         <!-- Checklist Categories Grid -->
         <main class="categories-grid" id="categoriesGrid">
             <!-- JavaScript will populate categories and items here dynamically -->
@@ -106,7 +197,7 @@
 
         <!-- Footer -->
         <footer class="app-footer">
-            <p>จัดเตรียมห้องเรียบร้อย แล้วกลับบ้านไปเจอครอบครัวที่บุรีรัมย์อย่างสุขใจ ❤️</p>
+            <p id="footerMessage">จัดเตรียมห้องเรียบร้อย แล้วเดินทางอย่างสุขใจ ❤️</p>
             <p class="copyright">พัฒนาด้วยความใส่ใจเป็นพิเศษเพื่อทริปแสนปลอดภัย</p>
         </footer>
     </div>

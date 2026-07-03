@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CSS Design System - Buriram Room Checklist (Premium & Rich Aesthetics)
+   CSS Design System - Travel Checklist (Premium & Rich Aesthetics)
    ========================================================================== */
 
 /* --- Custom Variables & Theme Variables --- */
@@ -41,7 +41,7 @@
     --color-exam: #eab308;
     --color-exam-bg: rgba(234, 179, 8, 0.1);
 
-    /* Accent & Brand Colors (Inspired by Buriram Stone & Warm Sunset) */
+    /* Accent & Brand Colors */
     --primary-accent: #ff6b35;
     --primary-accent-hover: #e85a24;
     --primary-accent-glow: rgba(255, 107, 53, 0.35);
@@ -195,13 +195,48 @@ body {
     50% { transform: translateY(-8px); }
 }
 
-.logo-area h1 {
+/* --- Editable Header --- */
+.editable-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.editable-header h1 {
     font-size: 1.8rem;
     font-weight: 700;
     letter-spacing: -0.025em;
     background: linear-gradient(135deg, var(--text-primary) 30%, var(--primary-accent) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.btn-edit-trip {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background-color: rgba(0, 0, 0, 0.03);
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+    opacity: 0.5;
+}
+
+.btn-edit-trip:hover {
+    opacity: 1;
+    color: var(--primary-accent);
+    border-color: var(--primary-accent);
+    background-color: var(--primary-accent-glow);
+    transform: scale(1.1);
+}
+
+[data-theme="dark"] .btn-edit-trip {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: rgba(255, 255, 255, 0.03);
 }
 
 .logo-area .subtitle {
@@ -358,6 +393,13 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+.dashboard-actions-left {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 .countdown-badge {
     display: flex;
     align-items: center;
@@ -412,6 +454,32 @@ body {
     color: var(--text-primary);
 }
 
+.btn-primary {
+    background-color: var(--primary-accent);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px var(--primary-accent-glow);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px var(--primary-accent-glow);
+}
+
+.btn-accent {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-accent:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    filter: brightness(1.1);
+}
+
 .btn-icon {
     width: 40px;
     height: 40px;
@@ -430,6 +498,40 @@ body {
 .btn-icon:hover {
     transform: rotate(15deg) scale(1.05);
     box-shadow: var(--shadow-hover);
+}
+
+/* --- Add Category Button --- */
+.add-category-area {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-add-category {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.8rem;
+    border-radius: 14px;
+    font-family: var(--font-primary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px dashed rgba(0, 0, 0, 0.15);
+    background-color: rgba(0, 0, 0, 0.02);
+    color: var(--text-muted);
+    transition: all var(--transition-fast);
+}
+
+[data-theme="dark"] .btn-add-category {
+    border: 2px dashed rgba(255, 255, 255, 0.12);
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.btn-add-category:hover {
+    border-color: var(--primary-accent);
+    color: var(--primary-accent);
+    background-color: var(--primary-accent-glow);
+    transform: translateY(-2px);
 }
 
 /* --- Categories Grid --- */
@@ -504,6 +606,12 @@ body {
     color: var(--text-primary);
 }
 
+.category-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 .category-badge {
     font-size: 0.75rem;
     font-weight: 700;
@@ -512,6 +620,31 @@ body {
     padding: 0.15rem 0.5rem;
     border-radius: 6px;
     border: 1px solid rgba(var(--category-color), 0.15);
+}
+
+/* Delete Category Button */
+.btn-delete-category {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.3rem;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all var(--transition-fast);
+}
+
+.category-card:hover .btn-delete-category {
+    opacity: 0.5;
+}
+
+.btn-delete-category:hover {
+    opacity: 1 !important;
+    color: var(--danger-accent);
+    background-color: rgba(239, 68, 68, 0.1);
 }
 
 /* --- Checklist Items List --- */
@@ -644,7 +777,7 @@ body {
     color: var(--text-muted);
 }
 
-/* --- Delete Button for Custom Items --- */
+/* --- Delete Button for ALL Items --- */
 .btn-delete-task {
     background: none;
     border: none;
@@ -657,13 +790,15 @@ body {
     justify-content: center;
     opacity: 0;
     transition: all var(--transition-fast);
+    flex-shrink: 0;
 }
 
 .checklist-item:hover .btn-delete-task {
-    opacity: 1;
+    opacity: 0.6;
 }
 
 .btn-delete-task:hover {
+    opacity: 1 !important;
     color: var(--danger-accent);
     background-color: rgba(239, 68, 68, 0.1);
 }
@@ -932,6 +1067,263 @@ body {
     font-size: 1.1rem;
 }
 
+/* ==========================================================================
+   MODALS - Edit Trip, Add Category, Summary
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 1rem;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 480px;
+    padding: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    animation: modalSlideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-content.modal-large {
+    max-width: 640px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-large .modal-body {
+    overflow-y: auto;
+    max-height: 55vh;
+}
+
+@keyframes modalSlideIn {
+    from { transform: translateY(30px) scale(0.95); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem 1rem 2rem;
+}
+
+.modal-header h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.btn-modal-close {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background-color: rgba(0, 0, 0, 0.03);
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+[data-theme="dark"] .btn-modal-close {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.btn-modal-close:hover {
+    color: var(--danger-accent);
+    background-color: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+.modal-body {
+    padding: 1rem 2rem 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.6rem;
+    padding: 1rem 2rem 1.5rem 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .modal-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Form Groups */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.modal-input {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.02);
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    outline: none;
+    transition: all var(--transition-fast);
+}
+
+[data-theme="dark"] .modal-input {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+.modal-input:focus {
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 3px var(--primary-accent-glow);
+    background-color: var(--bg-main);
+}
+
+.modal-input::placeholder {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+select.modal-input {
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+/* ==========================================================================
+   SUMMARY VIEW STYLES
+   ========================================================================== */
+
+.summary-overview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.summary-stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2rem 0.8rem;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.08) 0%, rgba(156, 39, 176, 0.08) 100%);
+    border: 1px solid rgba(255, 107, 53, 0.1);
+}
+
+.summary-stat-number {
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary-accent) 0%, #9c27b0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.summary-stat-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+}
+
+.summary-all-done {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.summary-all-done-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 0.8rem;
+    animation: pulseIcon 1.5s infinite alternate;
+}
+
+.summary-all-done p {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.summary-section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.8rem;
+    margin-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-accent-glow);
+}
+
+.summary-category {
+    margin-bottom: 1rem;
+}
+
+.summary-category h4 {
+    font-size: 0.95rem;
+    font-weight: 650;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.summary-count {
+    font-weight: 500;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.summary-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-left: 0.5rem;
+}
+
+.summary-list li {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    padding: 0.3rem 0;
+}
+
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
     .app-container {
@@ -943,7 +1335,7 @@ body {
         font-size: 2.3rem;
     }
     
-    .logo-area h1 {
+    .editable-header h1 {
         font-size: 1.5rem;
     }
     
@@ -975,6 +1367,10 @@ body {
         align-items: stretch;
     }
     
+    .dashboard-actions-left {
+        justify-content: center;
+    }
+    
     .countdown-badge {
         justify-content: center;
     }
@@ -995,5 +1391,35 @@ body {
     
     .save-status {
         align-self: flex-end;
+    }
+    
+    .modal-content {
+        max-width: 100%;
+    }
+    
+    .modal-header {
+        padding: 1.2rem 1.5rem 0.8rem 1.5rem;
+    }
+    
+    .modal-body {
+        padding: 0.8rem 1.5rem 1rem 1.5rem;
+    }
+    
+    .modal-footer {
+        padding: 0.8rem 1.5rem 1.2rem 1.5rem;
+    }
+    
+    .summary-overview {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.6rem;
+    }
+    
+    .summary-stat-number {
+        font-size: 1.3rem;
+    }
+    
+    .tab-btn {
+        font-size: 0.85rem;
+        padding: 0.7rem 0.8rem;
     }
 }
